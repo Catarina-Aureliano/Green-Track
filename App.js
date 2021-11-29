@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import Footer from './components/Footer';
 
 function App(){
   const [nome, setNome] = useState('');
@@ -23,14 +24,29 @@ function App(){
 
   return(
     <View  style={styles.container}>
+      
+      <ImageBackground source={require('./src/kraft.jpg')} resizeMode="cover" style={styles.image}>
 
       <View  style={styles.primeiraParte}>
       <Image
       source={require('./src/logo.jpg')}
       style={styles.img}
       />
+      <Text style={styles.texto}>Algo que embase nosso app</Text>
       </View>
 
+
+      </ImageBackground>
+      <Footer></Footer>
+  
+
+
+
+    </View>
+  );
+}
+
+/*  
       <View style={styles.segundaParte}>
       <Text style={styles.texto}>Informe o código do produto</Text>
 
@@ -48,16 +64,15 @@ function App(){
 
       <Text style={styles.texto}> {input} </Text>
       </View>
-
-    </View>
-  );
-}
+*/
 
 const styles = StyleSheet.create({
   container:{
+  flex: 1
+},
+image: {
   flex: 1,
-
-  backgroundColor: '#7E8E65'
+  justifyContent: "center"
 },
   input:{
     height: 45,
@@ -69,10 +84,11 @@ const styles = StyleSheet.create({
 },
   texto:{
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: 20,
     margin: 15,
-    color: '#8FA3B4',
-    fontWeight: 'bold'
+    color: '#7E8E65',
+    fontWeight: 'bold',
+    fontFamily: 'tahoma'
 },
 img:{
   width: 450,
@@ -98,7 +114,8 @@ btnTexto:{
 },
 primeiraParte:{
   flex: 1,
-  alignItems: 'center'
+  alignItems: 'center',
+  justifyContent: 'center',
 },
 segundaParte:{
   flex: 3,
