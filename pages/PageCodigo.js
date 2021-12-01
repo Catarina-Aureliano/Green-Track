@@ -1,6 +1,6 @@
 import React  from 'react';
 import { View, Text, StyleSheet, Image, ImageBackground, TouchableOpacity } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { RNCamera } from 'react-native-camera'
 
 const PageCodigo = ({navigation}) => {
 
@@ -12,9 +12,18 @@ const PageCodigo = ({navigation}) => {
       <View  style={styles.primeiraParte}>
       <Image source={require('../src/logo.jpg')} style={styles.img}/>
 
-      <TouchableOpacity style={styles.qrcode}>
-            <MaterialIcons name="control-point" size={200} color='black' />
-        </TouchableOpacity>
+      <RNCamera
+      style={styles.preview}
+      type={RNCamera.Constants.Type.back}
+      flashMode={RNCamera.Constants.FlashMode.auto}
+      androidCameraPermissionOptions={{
+        title: 'Permissão para usar a câmera',
+        message: 'Aceita que o App utilize sua câmera?',
+        buttonPositive: 'OK',
+        buttonNegative: 'Cancelar'
+      }}
+      >
+      </RNCamera>
 
       <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Result')}>
         <View style={styles.btnArea}>
@@ -52,7 +61,8 @@ botao:{
   borderColor: 'white',
   borderRadius: 20,
   backgroundColor: '#9CD497',
-  marginTop: 60
+  marginTop: 50,
+  marginBottom: 40
 },
 btnArea:{
   flex: 1,
@@ -64,8 +74,12 @@ btnTexto:{
   fontWeight: 'bold',
   color: 'black',
 },
-qrcode:{
-  marginTop: 70
+preview:{
+  flex:1,
+  justifyContent: 'flex-end',
+  width: '30%',
+  marginTop: 50,
+  alignItems: 'center'
 }
 });
 

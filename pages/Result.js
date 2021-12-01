@@ -15,13 +15,19 @@ function Result(){
 
       <ScrollView>
         <View style={styles.areaResultado}>
-        <Text style={styles.resultado}>Aqui será o resultado da pesquisa</Text>
+        <Text style={styles.resultado}>eu sou uma T-SHIRT</Text>
         </View>
         <View style={styles.areaResultado}>
-        <Text style={styles.resultado}>Aqui será o resultado da pesquisa</Text>
+        <Text style={styles.resultado}>eu fui produzida pela RESERVA</Text>
+        </View>  
+        <View style={styles.areaResultado}>
+        <Text style={styles.resultado}>meu código de barras é 12</Text>
         </View>
         <View style={styles.areaResultado}>
-        <Text style={styles.resultado}>Aqui será o resultado da pesquisa</Text>
+        <Text style={styles.resultado}>meu tamanho é M</Text>
+        </View>    
+         <View style={styles.areaResultado}>
+        <Text style={styles.resultado}>eu sou composta de ELASTANO</Text>
         </View>    
       </ScrollView>
  
@@ -65,12 +71,11 @@ areaResultado:{
   backgroundColor: 'white',
   
 },
-
 resultado:{
-  fontSize: 16,
+  fontSize: 20,
   color: 'black',
   fontWeight: 'bold',
-}
+},
 });
 
 export default Result;
