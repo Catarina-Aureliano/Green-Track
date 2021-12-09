@@ -7,6 +7,11 @@ import Home from './pages/Home';
 import PageCodigo from './pages/PageCodigo';
 import Result from './pages/Result';
 
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { navigationRef } from './RouteService';
+
+const Stack = createNativeStackNavigator();
+
 const Tab = createBottomTabNavigator();
 
 const icons = {
@@ -21,9 +26,9 @@ const icons = {
     }
 };
 
-const Route = () => {
+const TabNavigator = () => {
     return (
-        <NavigationContainer>
+//        <NavigationContainer>
             <Tab.Navigator
             screenOptions={ ({route}) => ({
                 tabBarIcon: ({ color, size }) => {
@@ -35,17 +40,40 @@ const Route = () => {
                 tabBarShowLabel:false
             }) }
             >
-                <Tab.Screen name='Home' component={Home}/>
+                <Tab.Screen name='Home' component={Home}/> 
                 <Tab.Screen name='PageCodigo' component={PageCodigo}/>
                 <Tab.Screen name='Result' component={Result}/>
             </Tab.Navigator>
-        </NavigationContainer>
+
+
+   //     </NavigationContainer>
     )
-
-
 }
 
-export default Route
+
+
+const Navigator = () => (
+    <Stack.Navigator headerMode="none" screenOptions={{headerShown: false}}>
+    <Stack.Screen name="Home" component={TabNavigator} />
+    <Stack.Screen name="Result" component={Result} />
+    </Stack.Navigator>
+)
+
+ 
+  // Navegador Principal
+  export const AppNavigator = () => {
+
+    return (
+        <NavigationContainer ref={navigationRef}>
+            <Navigator/>
+
+
+
+
+        </NavigationContainer>
+
+    )}
+
 
 
 

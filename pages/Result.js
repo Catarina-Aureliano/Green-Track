@@ -1,43 +1,80 @@
 import React  from 'react';
 import { View, Text, StyleSheet, Image, ImageBackground, ScrollView } from 'react-native';
+import { calculateMaterialCarbon, calculateMaterialWater, caulculateMaterialWeight } from '../api/calculateCarbon';
 
-function Result(){
+function Result( props ){
 
-  return(
-    <View  style={styles.container}>
-      
-      <ImageBackground source={require('../src/kraft.jpg')} resizeMode="cover" style={styles.cover}>
+console.log(props.route)
 
-      <View  style={styles.areaImage}>
-      <Image source={require('../src/logo.jpg')} style={styles.img}/>
-      </View>
-
-
-      <ScrollView>
-        <View style={styles.areaResultado}>
-        <Text style={styles.resultado}>eu sou uma T-SHIRT</Text>
-        </View>
-        <View style={styles.areaResultado}>
-        <Text style={styles.resultado}>eu fui produzida pela RESERVA</Text>
-        </View>  
-        <View style={styles.areaResultado}>
-        <Text style={styles.resultado}>meu código de barras é 12</Text>
-        </View>
-        <View style={styles.areaResultado}>
-        <Text style={styles.resultado}>meu tamanho é M</Text>
-        </View>    
-         <View style={styles.areaResultado}>
-        <Text style={styles.resultado}>eu sou composta de ELASTANO</Text>
-        </View>    
-      </ScrollView>
- 
-      </ImageBackground>
-
-
+if (props.route.params!==undefined){
+  function setInformation(params){
+    const weight = caulculateMaterialWeight(params.porcentagem1, params.tamanho)
+    const water = calculateMaterialWater(weight, params.tecido1)
+    const carbon = calculateMaterialCarbon(weight, params.tecido1)
   
+    const weight2 = caulculateMaterialWeight(params.porcentagem2, params.tamanho)
+    const water2 = calculateMaterialWater(weight, params.tecido2)
+    const carbon2 = calculateMaterialCarbon(weight, params.tecido2)
+  
+    return [
+      {name: params.tecido1, weight: weight, water: water, carbon: carbon},
+      {name: params.tecido2, weight: weight2, water: water2, carbon: carbon2}
+     ]
+  }
+   
+    const data = setInformation(props.route.params) || [
+      {name: '', weight: '', water: '', carbon: ''},
+      {name: '', weight: '', water: '', carbon: ''}
+     ]
+
+     return(
+      <View  style={styles.container}>
+        
+        <ImageBackground source={require('../src/kraft.jpg')} resizeMode="cover" style={styles.cover}>
+  
+        <View  style={styles.areaImage}>
+        <Image source={require('../src/logo.jpg')} style={styles.img}/>
+        </View>
+  
+  
+        <ScrollView>
+          <View style={styles.areaResultado}>
+          <Text style={styles.resultado}>Esta peça utilizou {data[0].water + data[1].water} litros de água em sua produção</Text>
+          </View>
+          <View style={styles.areaResultado}>
+          <Text style={styles.resultado}>Eu emito {data[0].carbon + data[1].carbon}kg de carbono</Text>
+          </View>  
+          <View style={styles.areaResultado}>
+          <Text style={styles.resultado}>Eu fui fabricada pela empresa Osklen</Text>
+          </View>
+          <View style={styles.areaResultado}>
+          <Text style={styles.resultado}>O custo do meu reparo é {props.route.params.tamanho}</Text>
+          </View>    
+           <View style={styles.areaResultado}>
+          <Text style={styles.resultado}>Eu fui fabricada no Brasil</Text>
+          </View>    
+        </ScrollView>
+   
+        </ImageBackground>
+  
+  
+    
+      </View>
+    );
+  }
+  return (
+    <View>
+      <Text>
+CARREGANDO
+      </Text>
     </View>
-  );
+  )
+
 }
+
+
+
+ 
 
 const styles = StyleSheet.create({
 container:{
